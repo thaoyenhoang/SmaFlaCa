@@ -1,7 +1,22 @@
+using SmaFlaCa_BLL.Interfaces;
+using SmaFlaCa_BLL.Services;
+using SmaFlaCa_DAL.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+try
+{
+    var connectionString = builder.Configuration.GetConnectionString("FlashcardDB");
+    builder.Services.AddScoped<IDeckRepository>(
+    _ => new DeckRepository(connectionString));
+    builder.Services.AddScoped<IDeckService, DeckService>();
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
 
 var app = builder.Build();
 
