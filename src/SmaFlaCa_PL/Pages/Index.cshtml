@@ -10,7 +10,44 @@
     <script src="~/js/site.js"></script>
 </head>
 <body>
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+        </svg>
+    </button>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create your new deck</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="deckTitle" class="form-label">Deck Title</label>
+                            <input type="text" class="form-control" id="deckTitle" placeholder="Enter deck title">
+                        </div>
+                        <div class="mb-3">
+                            <label for="deckDescription" class="form-label">Deck Description</label>
+                            <input type="text" class="form-control" id="deckDescription" placeholder="Enter deck description">
+                        </div>
+                        <div class="mb-3">
+                            <label for="deckImagePath" class="form-label">Deck Image</label>
+                            <input type="text" class="form-control" id="deckImagePath" placeholder="Enter deck image URL">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="addDeckButton">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4" id="decksContainer">
         @foreach (var deck in Model.decks)
         {
             <div class="col">
@@ -24,5 +61,12 @@
             </div>
         }
     </div>
+    <form method="POST">
+        <input type="hidden" id="newDeckTitle" name="newDeckTitle" />
+        <input type="hidden" id="newDeckDescription" name="newDeckDescription" />
+        <input type="hidden" id="newDeckImagePath" name="newDeckImagePath" />
+
+        <button type="submit" id="submitNewDeck" asp-page-handler="Create" style="display:none">Save</button>
+    </form>
 </body>
 </html>

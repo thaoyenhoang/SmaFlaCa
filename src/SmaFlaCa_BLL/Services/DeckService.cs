@@ -8,7 +8,7 @@ namespace SmaFlaCa_BLL.Services
 {
     public class DeckService : IDeckService
     {
-        private IDeckRepository _deckRepository; // BLL doesnt need to know about the DataRepository, it only needs to know about the IDeckRepository interface
+        private IDeckRepository _deckRepository;
         public DeckService(IDeckRepository deckRepository)
         {
             _deckRepository = deckRepository;
@@ -16,6 +16,10 @@ namespace SmaFlaCa_BLL.Services
         public List<Deck> GetAllDecks()
         {
             return _deckRepository.GetAllDecks();
+        }
+        public void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
+        {
+            _deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
         }
     }
 }

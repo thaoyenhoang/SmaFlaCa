@@ -52,6 +52,36 @@ namespace SmaFlaCa_DAL.Repositories
                 return decks;
             }
         }
+        public void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine("Connection opened successfully.");
+                    using (var command = new SqlCommand("INSERT INTO DECK (deckTitle, deckDescription, deckImagePath) VALUES (@deckTitle, @deckDescription, @deckImagePath)", connection))
+                    {
+                        command.Parameters.AddWithValue("@deckTitle", deckTitle);
+                        command.Parameters.AddWithValue("@deckDescription", deckDescription);
+                        if (deckImagePath == null)
+                        {
+                            command.Parameters.AddWithValue("@deckImagePath", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@deckImagePath", deckImagePath);
+                        }
+                        command.ExecuteNonQuery();
+                    }
+                }
+                      
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
     }
 }
     

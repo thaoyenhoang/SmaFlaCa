@@ -8,5 +8,6 @@ namespace SmaFlaCa_BLL.Interfaces
     public interface IDeckService
     {
         List<Deck> GetAllDecks();
+        void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath);
     }
 }

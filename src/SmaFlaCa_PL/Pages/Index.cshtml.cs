@@ -21,5 +21,13 @@ namespace SmaFlaCa_PL.Pages
         {
             decks = deckService.GetAllDecks();
         }
+        public IActionResult OnPostCreate(
+          string newDeckTitle,
+          string newDeckDescription,
+          string newDeckImagePath)
+        {
+            deckService.CreateDeck(newDeckTitle, newDeckDescription, newDeckImagePath);
+            return RedirectToPage();
+        }
     }
 }

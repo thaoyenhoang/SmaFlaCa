@@ -2,3 +2,26 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+document.addEventListener("DOMContentLoaded", function () {
+    const addDeckButton = document.getElementById("addDeckButton");
+    if (!addDeckButton) return;
+    addDeckButton.addEventListener('click', function () {
+
+        // Read each input field's value
+        const deckTitle = document.getElementById("deckTitle").value;
+        const deckDescription = document.getElementById("deckDescription").value;
+        const deckImagePath = document.getElementById("deckImagePath").value;
+
+
+        //Write the typed input into the hidden form fields
+        document.getElementById("newDeckTitle").value = deckTitle;
+        document.getElementById("newDeckDescription").value = deckDescription;
+        document.getElementById("newDeckImagePath").value = deckImagePath;
+
+        //Click the (hidden) submit button to submit the form => Send the POST request to OnPostCreate()
+        document.getElementById("submitNewDeck").click();
+    })
+})
+
+ 
