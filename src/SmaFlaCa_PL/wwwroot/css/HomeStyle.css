@@ -3,3 +3,10 @@
     height: 15vw;
     object-fit: fill;
 }
+ .card{
+     cursor: pointer;
+ }
+
+ .selected{
+     border: 2px solid blue;
+ }

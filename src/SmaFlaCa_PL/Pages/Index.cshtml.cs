@@ -29,5 +29,10 @@ namespace SmaFlaCa_PL.Pages
             deckService.CreateDeck(newDeckTitle, newDeckDescription, newDeckImagePath);
             return RedirectToPage();
         }
+        public IActionResult OnPostDelete(int selectedDeckId)
+        {
+            deckService.DeleteDeck(selectedDeckId);
+            return RedirectToPage();
+        }
     }
 }

@@ -23,5 +23,36 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("submitNewDeck").click();
     })
 })
+function DeckClickEvents() {
 
- 
+    // Go through every deck, on each deck listen for a click
+    const decks = document.querySelectorAll(".card")
+
+    decks.forEach(deck => {
+        deck.addEventListener('click', function () {
+
+            // first remove the selected class on all other decks
+            decks.forEach(deck => deck.classList.remove("selected"));
+
+            // add the selected class to the clicked deck
+            this.classList.add("selected");
+        });
+
+    });
+}
+
+document.getElementById("deleteDeckButton").addEventListener("click", function () {
+        const selectedDeck = document.querySelector(".selected");
+
+        if (confirm("Do you want to delete this deck permanently?") == true) {
+
+            const id = selectedDeck.dataset.id;
+
+            document.getElementById("selectedDeckId").value = id;
+            document.getElementById("submitDeleteDeck").click();
+
+        }
+        else {
+            selectedRow.classList.remove("selected");
+        }
+    })

@@ -21,5 +21,9 @@ namespace SmaFlaCa_BLL.Services
         {
             _deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
         }
+        public void DeleteDeck(int deckId)
+        {
+            _deckRepository.DeleteDeck(deckId);
+        }
     }
 }

@@ -16,9 +16,14 @@
             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
         </svg>
     </button>
+    <button type="button" class="btn btn-primary" id="deleteDeckButton">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+        </svg>
+    </button>
 
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Create your new deck</h1>
@@ -51,7 +56,7 @@
         @foreach (var deck in Model.decks)
         {
             <div class="col">
-                <div class="card">
+                <div class="card" data-id="@deck.deckId">
                     <img src="@deck.deckImagePath" class="card-img-top" alt=",,,">
                     <div class="card-body">
                         <h4 class="card-title">@deck.deckTitle</h4>
@@ -68,5 +73,17 @@
 
         <button type="submit" id="submitNewDeck" asp-page-handler="Create" style="display:none">Save</button>
     </form>
+
+    <form method="POST">
+        <input type="hidden" id="selectedDeckId" name="selectedDeckId" />
+        <button type="submit" id="submitDeleteDeck" asp-page-handler="Delete" style="display:none">Delete</button>
+    </form>
+
+    <script>
+        DeckClickEvents();
+    </script>
+    <dialog id="addDeckModal">
+        <p>New deck added!</p>
+    </dialog>
 </body>
 </html>

@@ -82,6 +82,27 @@ namespace SmaFlaCa_DAL.Repositories
                 }
             }
         }
+
+        public void DeleteDeck(int deckId)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine("Connection opened successfully.");
+                    using (var command = new SqlCommand("DELETE FROM DECK WHERE deckId = @deckId", connection))
+                    {
+                        command.Parameters.AddWithValue("@deckId", deckId);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
     }
 }
     

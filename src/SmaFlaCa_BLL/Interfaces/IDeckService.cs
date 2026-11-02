@@ -9,5 +9,6 @@ namespace SmaFlaCa_BLL.Interfaces
     {
         List<Deck> GetAllDecks();
         void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath);
+        void DeleteDeck(int deckId);
     }
 }
