@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="SmaFlaCa_BLL/SmaFlaCa_BLL.csproj" Id="742a70b8-4407-48fe-bbb7-a5ba8705a0c7" />
-    <Project Path="SmaFlaCa_DAL/SmaFlaCa_DAL.csproj" Id="8a25718c-79be-4c92-9923-8c27e6499673" />
-    <Project Path="SmaFlaCa_PL/SmaFlaCa_PL.csproj" Id="5f4c673a-ff75-4e53-aca4-2ecf857d9013" />
+    <Project Path="src/SmaFlaCa_BLL/SmaFlaCa_BLL.csproj" />
+    <Project Path="src/SmaFlaCa_DAL/SmaFlaCa_DAL.csproj" />
+    <Project Path="src/SmaFlaCa_PL/SmaFlaCa_PL.csproj" />
   </Folder>
 </Solution>

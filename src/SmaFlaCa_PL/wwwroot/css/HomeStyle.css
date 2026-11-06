@@ -1,0 +1,12 @@
+﻿.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: fill;
+}
+ .card{
+     cursor: pointer;
+ }
+
+ .selected{
+     border: 2px solid blue;
+ }
