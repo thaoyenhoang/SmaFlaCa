@@ -34,7 +34,7 @@ namespace SmaFlaCa_PL.Pages
             int newCardDeckId)
         {
             flashcardService.CreateFlashcard(newCardQuestion, newCardAnswer, newCardImagePath, newCardDeckId);
-            return RedirectToPage("/Index");
+            return RedirectToPage("/DeckDetails", new { id = newCardDeckId });
         }
         public IActionResult OnPostDeleteDeck(int selectedDeckId)
         {
