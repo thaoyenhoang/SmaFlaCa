@@ -8,22 +8,22 @@ namespace SmaFlaCa_BLL.Services
 {
     public class DeckService : IDeckService
     {
-        private IDeckRepository _deckRepository;
+        private IDeckRepository deckRepository;
         public DeckService(IDeckRepository deckRepository)
         {
-            _deckRepository = deckRepository;
+            this.deckRepository = deckRepository;
         }
         public List<Deck> GetAllDecks()
         {
-            return _deckRepository.GetAllDecks();
+            return deckRepository.GetAllDecks();
         }
         public void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
         {
-            _deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
+            deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
         }
         public void DeleteDeck(int deckId)
         {
-            _deckRepository.DeleteDeck(deckId);
+            deckRepository.DeleteDeck(deckId);
         }
     }
 }

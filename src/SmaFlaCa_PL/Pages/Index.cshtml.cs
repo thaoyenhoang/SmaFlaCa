@@ -12,6 +12,7 @@ namespace SmaFlaCa_PL.Pages
 
         public List<Deck> decks { get; private set; }
 
+
         public IndexModel(IDeckService deckService)
         {
             this.deckService = deckService;
@@ -20,6 +21,7 @@ namespace SmaFlaCa_PL.Pages
         public void OnGet()
         {
             decks = deckService.GetAllDecks();
+
         }
         public IActionResult OnPostCreate(
           string newDeckTitle,
@@ -29,10 +31,6 @@ namespace SmaFlaCa_PL.Pages
             deckService.CreateDeck(newDeckTitle, newDeckDescription, newDeckImagePath);
             return RedirectToPage();
         }
-        public IActionResult OnPostDelete(int selectedDeckId)
-        {
-            deckService.DeleteDeck(selectedDeckId);
-            return RedirectToPage();
-        }
+      
     }
 }

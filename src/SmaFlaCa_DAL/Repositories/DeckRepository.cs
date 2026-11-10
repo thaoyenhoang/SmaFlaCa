@@ -31,20 +31,31 @@ namespace SmaFlaCa_DAL.Repositories
                             {
                                 int id = reader.GetInt32(0);
                                 string title = reader.GetString(1);
-                                string description = reader.GetString(2);
-                                if (reader.IsDBNull(3))
+                                if (reader.IsDBNull(2) && reader.IsDBNull(3))
                                 {
+                                    decks.Add(new Deck(id, title));
+                                }
+                                else if (reader.IsDBNull(2) && !reader.IsDBNull(3))
+                                {
+                                    string? imagePath = reader.GetString(3);
+                                    decks.Add(new Deck(id, title, imagePath));
+                                }
+                                else if (reader.IsDBNull(3) && !reader.IsDBNull(2))
+                                {
+                                    string? description = reader.GetString(2);
                                     decks.Add(new Deck(id, title, description));
                                 }
                                 else
                                 {
+                                    string? description = reader.GetString(2);
                                     string? imagePath = reader.GetString(3);
                                     decks.Add(new Deck(id, title, description, imagePath));
                                 }
                             }
+                              
+                            }
                         }
                     }
-                }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
@@ -63,7 +74,14 @@ namespace SmaFlaCa_DAL.Repositories
                     using (var command = new SqlCommand("INSERT INTO DECK (deckTitle, deckDescription, deckImagePath) VALUES (@deckTitle, @deckDescription, @deckImagePath)", connection))
                     {
                         command.Parameters.AddWithValue("@deckTitle", deckTitle);
-                        command.Parameters.AddWithValue("@deckDescription", deckDescription);
+                        if (deckDescription == null)
+                        {
+                            command.Parameters.AddWithValue("@deckDescription", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@deckDescription", deckDescription);
+                        }
                         if (deckImagePath == null)
                         {
                             command.Parameters.AddWithValue("@deckImagePath", DBNull.Value);
