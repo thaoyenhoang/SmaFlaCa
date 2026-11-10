@@ -12,6 +12,9 @@ try
     builder.Services.AddScoped<IDeckRepository>(
     _ => new DeckRepository(connectionString));
     builder.Services.AddScoped<IDeckService, DeckService>();
+    builder.Services.AddScoped<IFlashcardRepository>(
+        _ => new FlashcardRepository(connectionString));
+    builder.Services.AddScoped<IFlashcardService, FlashcardService>();  
 }
 catch (Exception e)
 {
