@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     <link rel="stylesheet" href="~/css/HomeStyle.css" asp-append-version="true" />
-    <script src="~/js/site.js"></script>
+    <script src="~/js/detailsPage.js" defer></script>
 </head>
 <body>
 
@@ -58,12 +58,12 @@
             <div class="modal-body">
                 <form class="addCardForm">
                     <div class="mb-3">
-                        <label for="cardTitle" class="form-label">Question<div class="input-asterisk">*</div></label>
-                        <input type="text" class="form-control" id="cardTitle" placeholder="Enter question" required>
+                        <label for="cardQuestion" class="form-label">Question<div class="input-asterisk">*</div></label>
+                        <input type="text" class="form-control" id="cardQuestion" placeholder="Enter question" required>
                     </div>
                     <div class="mb-3">
-                        <label for="cardDescription" class="form-label">Answer</label>
-                        <input type="text" class="form-control" id="cardDescription" placeholder="Enter answer">
+                        <label for="cardAnswer" class="form-label">Answer</label>
+                        <input type="text" class="form-control" id="cardAnswer" placeholder="Enter answer">
                     </div>
                     <div class="mb-3">
                         <label for="cardImagePath" class="form-label">Card Image</label>
@@ -79,10 +79,10 @@
     </div>
 </div>
     <form method="POST">
-        <input type="hidden" id="newCardTitle" name="newCardTitle" />
-        <input type="hidden" id="newCardDescription" name ="newCardDescription" />
+        <input type="hidden" id="newCardQuestion" name="newCardQuestion" />
+        <input type="hidden" id="newCardAnswer" name="newCardAnswer" />
         <input type="hidden" id="newCardImagePath" name="newCardImagePath" />
-        <input type="hidden" id="cardDeckId" name="cardDeckId" />
+        <input type="hidden" id="newCardDeckId" name="newCardDeckId" />
 
         <button type="submit"  id="submitNewCard" asp-page-handler="CreateFlashcard" style="display:none">Save</button>
     </form>

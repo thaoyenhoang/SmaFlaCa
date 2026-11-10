@@ -19,26 +19,21 @@ namespace SmaFlaCa_PL.Pages
             this.flashcardService = flashcardService;
         }
         public Deck? deck { get; private set; }
-        public async Task<IActionResult> OnGet(int id)
+        public void OnGet(int id)
         {
             decks = deckService.GetAllDecks();
             
             deck = decks.FirstOrDefault(deck => deck.deckId == id);
 
-            if (deck is null)
-            {
-                return NotFound();
-            }
             flashcards = flashcardService.GetAllFlashcards(id);
-            return Page();
         }
         public IActionResult OnPostCreateFlashcard(
-            string question,
-            string answer,
-            string? cardImagePath,
-            int deckId)
+            string newCardQuestion,
+            string newCardAnswer,
+            string? newCardImagePath,
+            int newCardDeckId)
         {
-            flashcardService.CreateFlashcard(question, answer, cardImagePath, deckId);
+            flashcardService.CreateFlashcard(newCardQuestion, newCardAnswer, newCardImagePath, newCardDeckId);
             return RedirectToPage("/Index");
         }
         public IActionResult OnPostDeleteDeck(int selectedDeckId)
