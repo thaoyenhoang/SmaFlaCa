@@ -31,17 +31,18 @@ namespace SmaFlaCa_DAL.Repositories
                         {
                             while (reader.Read())
                             {
-                                int id = reader.GetInt32(0);
+                                int cardId = reader.GetInt32(0);
                                 string question = reader.GetString(1);
                                 string answer = reader.GetString(2);
+                                int cardDeckId = reader.GetInt32(4);
                                 if (reader.IsDBNull(3))
                                 {
-                                    flashcards.Add(new Flashcard(id, question, answer));
+                                    flashcards.Add(new Flashcard(cardId, question, answer, cardDeckId));
                                 }
                                 else
                                 {
-                                    string? imagePath = reader.GetString(3);
-                                    flashcards.Add(new Flashcard(id, question, answer, imagePath));
+                                    string? cardImagePath = reader.GetString(3);
+                                    flashcards.Add(new Flashcard(cardId, question, answer, cardImagePath, cardDeckId));
                                 }
                             }
                         }
@@ -62,7 +63,7 @@ namespace SmaFlaCa_DAL.Repositories
                 {
                     connection.Open();
                     Console.WriteLine("Connection opened successfully.");
-                    using (var command = new SqlCommand("INSERT INTO Flashcards (Question, Answer, CardImagePath, DeckID) VALUES (@Question, @Answer, @ImagePath, @DeckID)", connection))
+                    using (var command = new SqlCommand("INSERT INTO Flashcards (Question, Answer, CardImagePath, DeckID) VALUES (@Question, @Answer, @CardImagePath, @DeckID)", connection))
                     {
                         command.Parameters.AddWithValue("@Question", question);
                         command.Parameters.AddWithValue("@Answer", answer);

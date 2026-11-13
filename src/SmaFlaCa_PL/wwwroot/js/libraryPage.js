@@ -34,18 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 })
 
-document.getElementById("deleteDeckButton").addEventListener("click", function () {
 
-        if (confirm("Do you want to delete this deck permanently?") == true) {
-
-            const id = this.dataset.id;
-
-            document.getElementById("selectedDeckId").value = id;
-            document.getElementById("submitDeleteDeck").click();
-
-        }
-      
-    })
 
 
 
