@@ -21,5 +21,9 @@ namespace SmaFlaCa_BLL.Services
         {
             flashcardRepository.CreateFlashcard(question, answer, cardImagePath, deckID);
         }
+        public void DeleteFlashcard(int cardId)
+        {
+            flashcardRepository.DeleteFlashcard(cardId);
+        }
     }
 }
