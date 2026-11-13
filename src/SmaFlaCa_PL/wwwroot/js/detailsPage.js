@@ -1,6 +1,6 @@
 ﻿document.getElementById("deleteDeckButton").addEventListener("click", function () {
 
-    if (confirm("Do you want to delete this deck permanently?") == true) {
+    if (confirm("Do you want to delete this deck permanently? All the flashcards inside this deck will also be deleted") == true) {
 
         const id = this.dataset.id;
 
@@ -30,4 +30,17 @@ document.getElementById("addCardButton").addEventListener('click', function () {
 
     //Click the (hidden) submit button to submit the form => Send the POST request to OnPostCreate()
     document.getElementById("submitNewCard").click();
-    })
+})
+
+document.getElementById("deleteCardButton").addEventListener("click", function () {
+
+    if (confirm("Do you want to delete this card permanently?") == true) {
+
+        const id = this.dataset.id;
+
+        document.getElementById("selectedCardId").value = id;
+        document.getElementById("submitDeleteCard").click();
+
+    }
+
+})

@@ -9,5 +9,6 @@ namespace SmaFlaCa_BLL.Interfaces
     {
         List<Flashcard> GetAllFlashcards(int deckID);
         void CreateFlashcard(string question, string answer, string? cardImagePath, int deckID);
+        void DeleteFlashcard(int cardId);
     }
 }
