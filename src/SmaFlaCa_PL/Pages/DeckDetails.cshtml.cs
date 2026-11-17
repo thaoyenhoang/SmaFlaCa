@@ -41,10 +41,15 @@ namespace SmaFlaCa_PL.Pages
             deckService.DeleteDeck(selectedDeckId);
             return RedirectToPage("/Index");
         }
-        public IActionResult OnPostDeleteFlashCard(int selectedCardId, int deckId)
+        public IActionResult OnPostUpdateDeck(int originalDeckId, string editedDeckTitle, string editedDeckDescription, string? editedDeckImagePath)
+        {
+            deckService.UpdateDeck(originalDeckId, editedDeckTitle, editedDeckDescription, editedDeckImagePath);
+            return RedirectToPage("/DeckDetails", new { id = originalDeckId });
+        }
+        public IActionResult OnPostDeleteFlashcard(int selectedCardId, int selectedDeckId)
         {
             flashcardService.DeleteFlashcard(selectedCardId);
-            return RedirectToPage("/DeckDetails", new { id = deckId });
+            return RedirectToPage("/DeckDetails", new { id = selectedDeckId });
         }
     }
 }

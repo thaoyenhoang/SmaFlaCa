@@ -33,6 +33,49 @@
                         </svg>
                     </button>
             </div>
+                <button type="button" class="btn btn-primary" id="deleteCardButton" data-cardId=@card.cardId data-deckId=@card.cardDeckId>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                    </svg>
+                </button>
+                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.707 0L12.5 2.354a.5.5 0 0 1 0-.707l1-1a.5.5 0 0 1 .707 0z" />
+            <path d="M13.5 3.5 12.5 2.5 4 11v1h1z" />
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-7a.5.5 0 0 0-1 0v7a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5h7a.5.5 0 0 0 0-1h-7A1.5 1.5 0 0 0 1 2.5z" />
+        </svg>
+    </button>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit this deck</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="updateDeckForm">
+                        <div class="mb-3">
+                            <label for="updatedDeckTitle" class="form-label">Deck Title<div class="input-asterisk">*</div></label>
+                            <input type="text" class="form-control" id="updatedDeckTitle" value="@Model.deck.deckTitle" name="updatedDeckTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="updatedDeckDescription" class="form-label">Deck Description</label>
+                            <input type="text" class="form-control" id="updatedDeckDescription" value="@Model.deck.deckDescription" placeholder="Enter deck description" name="updatedDeckDescription">
+                        </div>
+                        <div class="mb-3">
+                            <label for="updatedDeckImagePath" class="form-label">Deck Image</label>
+                            <input type="text" class="form-control" id="updatedDeckImagePath" value="@Model.deck.deckImagePath" placeholder="Enter deck image URL" name="updatedDeckImagePath">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button data-id="@Model.deck.deckId" type="submit" class="btn btn-primary" id="updateDeckButton">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
         </div>
     </div>
 }
@@ -40,6 +83,46 @@
 <a asp-page="/Index" class="btn btn-secondary">
     Back to decks
 </a>
+  
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.707 0L12.5 2.354a.5.5 0 0 1 0-.707l1-1a.5.5 0 0 1 .707 0z" />
+            <path d="M13.5 3.5 12.5 2.5 4 11v1h1z" />
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-7a.5.5 0 0 0-1 0v7a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5h7a.5.5 0 0 0 0-1h-7A1.5 1.5 0 0 0 1 2.5z" />
+        </svg>
+    </button>
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit this deck</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="updateDeckForm">
+                        <div class="mb-3">
+                            <label for="updatedDeckTitle" class="form-label">Deck Title<div class="input-asterisk">*</div></label>
+                            <input type="text" class="form-control" id="updatedDeckTitle" value="@Model.deck.deckTitle" name="updatedDeckTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="updatedDeckDescription" class="form-label">Deck Description</label>
+                            <input type="text" class="form-control" id="updatedDeckDescription" value="@Model.deck.deckDescription" placeholder="Enter deck description" name="updatedDeckDescription">
+                        </div>
+                        <div class="mb-3">
+                            <label for="updatedDeckImagePath" class="form-label">Deck Image</label>
+                            <input type="text" class="form-control" id="updatedDeckImagePath" value="@Model.deck.deckImagePath" placeholder="Enter deck image URL" name="updatedDeckImagePath">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button data-id="@Model.deck.deckId" type="submit" class="btn btn-primary" id="updateDeckButton">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <button type="button" class="btn btn-primary" id="deleteDeckButton" data-id=@Model.deck.deckId>
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
         <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
@@ -104,13 +187,20 @@
     <button type="submit" id="submitDeleteDeck" asp-page-handler="DeleteDeck" style="display:none">Delete</button>
 </form>
 
-<form method="POST">
-    <input type="hidden" id="selectedCardId" name="selectedCardId" />
-    <input type="hidden" id="deckId" name="deckId" value="@Model.deck.deckId"/>
-    <button type="submit" id="submitDeleteCard" asp-page-handler="DeleteFlashcard" style="display:none">Delete</button>
-</form>
+    <form method="POST">
+        <input type="hidden" id="editedDeckTitle" name="editedDeckTitle" />
+        <input type="hidden" id="editedDeckDescription" name="editedDeckDescription" />
+        <input type="hidden" id="editedDeckImagePath" name="editedDeckImagePath" />
+        <input type="hidden" id="originalDeckId" name="originalDeckId" />
+
+        <button type="submit" id="submitEditedDeck" asp-page-handler="UpdateDeck" style="display:none">Edit</button>
+    </form>
     
-    
+    <form method="POST">
+        <input type="hidden" id="selectedDeckId" name="selectedDeckId" />
+        <input type="hidden" id="selectedCardId" name="selectedCardId" />
+        <button type="submit" id="submitDeleteCard" asp-page-handler="DeleteFlashcard" style="display:none">Delete</button>
+    </form>
 
 
 </body>

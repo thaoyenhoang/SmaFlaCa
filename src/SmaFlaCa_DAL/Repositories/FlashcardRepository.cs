@@ -85,6 +85,25 @@ namespace SmaFlaCa_DAL.Repositories
                 }
             }
         }
+        public void DeleteFlashcard(int cardId)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine("Connection opened successfully.");
+                    using (var command = new SqlCommand("DELETE FROM Flashcards WHERE CardID = @CardID", connection))
+                    {
+                        command.Parameters.AddWithValue("@CardID", cardId);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
 
         public void DeleteFlashcard(int cardId)
         {
@@ -108,6 +127,5 @@ namespace SmaFlaCa_DAL.Repositories
         }
 
     }
-
 }
  

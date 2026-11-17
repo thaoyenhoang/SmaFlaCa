@@ -26,24 +26,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="addDeckForm">
+                    <form method="POST" class="addDeckForm">
                         <div class="mb-3">
                             <label for="deckTitle" class="form-label">Deck Title<div class="input-asterisk">*</div></label>
-                            <input type="text" class="form-control" id="deckTitle" placeholder="Enter deck title" required>
+                            <input type="text" class="form-control" id="deckTitle" placeholder="Enter deck title" name="deckTitle" required>
                         </div>
                         <div class="mb-3">
                             <label for="deckDescription" class="form-label">Deck Description</label>
-                            <input type="text" class="form-control" id="deckDescription" placeholder="Enter deck description">
+                            <input type="text" class="form-control" id="deckDescription" placeholder="Enter deck description" name="deckDescription">
                         </div>
                         <div class="mb-3">
                             <label for="deckImagePath" class="form-label">Deck Image</label>
-                            <input type="text" class="form-control" id="deckImagePath" placeholder="Enter deck image URL">
+                            <input type="text" class="form-control" id="deckImagePath" placeholder="Enter deck image URL" name="deckImagePath">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="addDeckButton" >Add</button>
+                    <button type="submit" asp-page-handler="Create" class="btn btn-primary" id="addDeckButton">Add</button>
                 </div>
             </div>
         </div>
