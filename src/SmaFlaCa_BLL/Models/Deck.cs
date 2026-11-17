@@ -11,7 +11,6 @@ namespace SmaFlaCa_BLL.Models
         public string deckTitle { get; set; }
         public string deckDescription { get; set; } = "A cool description will go here";
         public string deckImagePath { get; set; } = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSltdyesaETmIsYYdxPW3gcpIW0LCkUWaTdcCzKII5VMw&s=10";
-        public List<Flashcard> flashcards { get; set; } = new List<Flashcard>();
         public Deck(int deckId, string deckTitle, string deckDescription)
         {
             this.deckId = deckId;
@@ -30,9 +29,6 @@ namespace SmaFlaCa_BLL.Models
             this.deckDescription = deckDescription;
             this.deckImagePath = deckImagePath;
         }
-        public void AddFlashcard(Flashcard flashcard)
-        {
-            flashcards.Add(flashcard);
-        }
+    
     }
 }

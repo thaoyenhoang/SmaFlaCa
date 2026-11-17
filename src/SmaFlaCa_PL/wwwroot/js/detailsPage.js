@@ -1,6 +1,6 @@
 ﻿document.getElementById("deleteDeckButton").addEventListener("click", function () {
 
-    if (confirm("Do you want to delete this deck permanently?") == true) {
+    if (confirm("Do you want to delete this deck permanently? All the flashcards inside this deck will also be deleted") == true) {
 
         const id = this.dataset.id;
 
