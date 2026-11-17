@@ -10,5 +10,6 @@ namespace SmaFlaCa_BLL.Interfaces
         List<Deck> GetAllDecks();
         void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath);
         void DeleteDeck(int deckId);
+        void UpdateDeck(int deckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath);
     }
 }

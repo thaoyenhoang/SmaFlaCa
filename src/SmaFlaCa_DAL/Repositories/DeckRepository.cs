@@ -121,6 +121,43 @@ namespace SmaFlaCa_DAL.Repositories
                 }
             }
         }
+        public void UpdateDeck(int deckId, string updatedDeckTitle, string? updatedDeckDescription, string? updatedDeckImagePath)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine("Connection opened successfully.");
+                    using (var command = new SqlCommand("UPDATE DECK SET deckTitle = @updatedDeckTitle, deckDescription = @updatedDeckDescription, deckImagePath = @updatedDeckImagePath WHERE deckId = @deckId", connection))
+                    {
+                        command.Parameters.AddWithValue("@deckId", deckId);
+                        command.Parameters.AddWithValue("@updatedDeckTitle", updatedDeckTitle);
+                        if (updatedDeckDescription == null)
+                        {
+                            command.Parameters.AddWithValue("@updatedDeckDescription", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@updatedDeckDescription", updatedDeckDescription);
+                        }
+                        if (updatedDeckImagePath == null)
+                        {
+                            command.Parameters.AddWithValue("@updatedDeckImagePath", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@updatedDeckImagePath", updatedDeckImagePath);
+                        }
+                        command.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
     }
 }
     
