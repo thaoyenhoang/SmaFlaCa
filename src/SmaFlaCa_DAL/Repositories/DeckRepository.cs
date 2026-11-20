@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SmaFlaCa_BLL.Models;
-using SmaFlaCa_BLL.Interfaces;
+using SmaFlaCa_Domain.Models;
 using Microsoft.Data.SqlClient;
+using SmaFlaCa_IDAL.Interfaces;
 
 namespace SmaFlaCa_DAL.Repositories
 {
@@ -38,11 +38,13 @@ namespace SmaFlaCa_DAL.Repositories
                                 else if (reader.IsDBNull(2) && !reader.IsDBNull(3))
                                 {
                                     string? imagePath = reader.GetString(3);
-                                    decks.Add(new Deck(id, title, imagePath));
+                                    var deckWithDefaultDescription = Deck.WithDefaultDescription(id, title, imagePath);
+                                    decks.Add(deckWithDefaultDescription);
                                 }
                                 else if (reader.IsDBNull(3) && !reader.IsDBNull(2))
                                 {
                                     string? description = reader.GetString(2);
+      
                                     decks.Add(new Deck(id, title, description));
                                 }
                                 else
@@ -129,7 +131,7 @@ namespace SmaFlaCa_DAL.Repositories
                 {
                     connection.Open();
                     Console.WriteLine("Connection opened successfully.");
-                    using (var command = new SqlCommand("UPDATE DECK SET deckTitle = @updatedDeckTitle, deckDescription = @updatedDeckDescription, deckImagePath = @updatedDeckImagePath WHERE deckId = @deckId", connection))
+                    using (var command = new SqlCommand("UPDATE DECK SET DeckTitle = @updatedDeckTitle, DeckDescription = @updatedDeckDescription, DeckImagePath = @updatedDeckImagePath WHERE DeckId = @deckId", connection))
                     {
                         command.Parameters.AddWithValue("@deckId", deckId);
                         command.Parameters.AddWithValue("@updatedDeckTitle", updatedDeckTitle);

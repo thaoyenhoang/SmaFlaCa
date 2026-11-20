@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SmaFlaCa_BLL.Models;
+using SmaFlaCa_Domain.Models;
 
-namespace SmaFlaCa_BLL.Interfaces
+namespace SmaFlaCa_IDAL.Interfaces
 {
     public interface IDeckRepository
     {

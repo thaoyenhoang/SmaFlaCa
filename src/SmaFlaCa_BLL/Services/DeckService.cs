@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SmaFlaCa_BLL.Models;
-using SmaFlaCa_BLL.Interfaces;
+using SmaFlaCa_IBLL.Interfaces;
+using SmaFlaCa_IDAL.Interfaces;
+using SmaFlaCa_Domain.Models;
 
 namespace SmaFlaCa_BLL.Services
 {

@@ -1,5 +1,8 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="Domain/SmaFlaCa_Domain.csproj" Id="fd63b368-44ab-44f3-adb3-5177bb16e0d2" />
+    <Project Path="IBLL/SmaFlaCa_IBLL.csproj" Id="1b13512f-472c-433c-8e8e-6443c11f1459" />
+    <Project Path="IDAL/SmaFlaCa_IDAL.csproj" Id="87661481-8306-49ca-b9c4-0a6a448095a7" />
     <Project Path="src/SmaFlaCa_BLL/SmaFlaCa_BLL.csproj" />
     <Project Path="src/SmaFlaCa_DAL/SmaFlaCa_DAL.csproj" />
     <Project Path="src/SmaFlaCa_PL/SmaFlaCa_PL.csproj" />

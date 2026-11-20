@@ -10,57 +10,38 @@
     }
 
 })
-document.getElementById("addCardButton").addEventListener('click', function () {
-    document.querySelector("form").requestSubmit();
+//document.getElementById("addCardButton").addEventListener('click', function () {
+//    document.querySelector("form").requestSubmit();
 
-    // Read each input field's value
-    const question = document.getElementById("cardQuestion").value;
-    if (question == "") {
-        return;
-    }
-    const answer = document.getElementById("cardAnswer").value;
-    const cardImagePath = document.getElementById("cardImagePath").value;
-    const deckId = this.dataset.id;
+//    // Read each input field's value
+//    const question = document.getElementById("cardQuestion").value;
+//    if (question == "") {
+//        return;
+//    }
+//    const answer = document.getElementById("cardAnswer").value;
+//    const cardImagePath = document.getElementById("cardImagePath").value;
+//    const deckId = this.dataset.id;
 
-    //Write the typed input into the hidden form fields
-    document.getElementById("newCardQuestion").value = question;
-    document.getElementById("newCardAnswer").value = answer;
-    document.getElementById("newCardImagePath").value = cardImagePath;
-    document.getElementById("newCardDeckId").value = deckId;
+//    //Write the typed input into the hidden form fields
+//    document.getElementById("newCardQuestion").value = question;
+//    document.getElementById("newCardAnswer").value = answer;
+//    document.getElementById("newCardImagePath").value = cardImagePath;
+//    document.getElementById("newCardDeckId").value = deckId;
 
-    //Click the (hidden) submit button to submit the form => Send the POST request to OnPostCreate()
-    document.getElementById("submitNewCard").click();
-})
-
-document.getElementById("updateDeckButton").addEventListener('click', function () {
-
-   
-    const updatedDeckTitle = document.getElementById("updatedDeckTitle").value;
-    const updatedDeckDescription = document.getElementById("updatedDeckDescription").value;
-    const updatedDeckImagePath = document.getElementById("updatedDeckImagePath").value;
-    const deckId = this.dataset.id;
+//    //Click the (hidden) submit button to submit the form => Send the POST request to OnPostCreate()
+//    document.getElementById("submitNewCard").click();
+//})
 
 
 
-    //Write the typed input into the hidden form fields
-    document.getElementById("editedDeckTitle").value = updatedDeckTitle;
-    document.getElementById("editedDeckDescription").value = updatedDeckDescription;
-    document.getElementById("editedDeckImagePath").value = updatedDeckImagePath;
-    document.getElementById("originalDeckId").value = deckId;
+document.querySelectorAll(".deleteCardButton").forEach(button => {
+    button.addEventListener("click", function () {
+        if (!confirm("Do you want to delete this card permanently?")) {
+            return;
+        }
 
-    document.getElementById("submitEditedDeck").click();
-});
-
-document.getElementById("deleteCardButton").addEventListener("click", function () {
-
-    if (confirm("Do you want to delete this card permanently?") == true) {
-
-        const cardId = this.dataset.cardId;
-        const deckId = this.dataset.deckId;
-
-        document.getElementById("selectedCardId").value = cardId;
-        document.getElementById("selectedDeckId").value = deckId;
+        document.getElementById("selectedCardId").value = this.dataset.id;
         document.getElementById("submitDeleteCard").click();
-
-    }
+    });
 });
+

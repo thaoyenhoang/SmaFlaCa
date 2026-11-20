@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SmaFlaCa_BLL.Interfaces;
-using SmaFlaCa_BLL.Models;
+using SmaFlaCa_IBLL.Interfaces;
+using SmaFlaCa_Domain.Models;
 
 namespace SmaFlaCa_PL.Pages
 {
@@ -41,15 +41,20 @@ namespace SmaFlaCa_PL.Pages
             deckService.DeleteDeck(selectedDeckId);
             return RedirectToPage("/Index");
         }
-        public IActionResult OnPostUpdateDeck(int originalDeckId, string editedDeckTitle, string editedDeckDescription, string? editedDeckImagePath)
+        public IActionResult OnPostUpdateDeck(int originalDeckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath)
         {
-            deckService.UpdateDeck(originalDeckId, editedDeckTitle, editedDeckDescription, editedDeckImagePath);
+            deckService.UpdateDeck(originalDeckId, updatedDeckTitle, updatedDeckDescription, updatedDeckImagePath);
             return RedirectToPage("/DeckDetails", new { id = originalDeckId });
         }
         public IActionResult OnPostDeleteFlashcard(int selectedCardId, int selectedDeckId)
         {
             flashcardService.DeleteFlashcard(selectedCardId);
             return RedirectToPage("/DeckDetails", new { id = selectedDeckId });
+        }
+        public IActionResult OnPostUpdateFlashcard(int originalCardId, string updatedCardQuestion, string updatedCardAnswer, string? updatedCardImagePath, int originalDeckId)
+        {
+            flashcardService.UpdateFlashcard(originalCardId, updatedCardQuestion, updatedCardAnswer, updatedCardImagePath);
+            return RedirectToPage("/DeckDetails", new { id = originalDeckId });
         }
     }
 }

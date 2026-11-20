@@ -1,5 +1,6 @@
-﻿using SmaFlaCa_BLL.Interfaces;
-using SmaFlaCa_BLL.Models;
+﻿using SmaFlaCa_Domain.Models;
+using SmaFlaCa_IBLL.Interfaces;
+using SmaFlaCa_IDAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,6 +25,10 @@ namespace SmaFlaCa_BLL.Services
         public void DeleteFlashcard(int cardId)
         {
             flashcardRepository.DeleteFlashcard(cardId);
+        }
+        public void UpdateFlashcard(int originalCardId, string updatedCardQuestion, string updatedCardAnswer, string? updatedCardImagePath)
+        {
+            flashcardRepository.UpdateFlashcard(originalCardId, updatedCardQuestion, updatedCardAnswer, updatedCardImagePath);
         }
     }
 }

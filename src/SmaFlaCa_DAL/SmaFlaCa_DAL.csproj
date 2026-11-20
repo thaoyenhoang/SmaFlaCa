@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SmaFlaCa_BLL\SmaFlaCa_BLL.csproj" />
+    <ProjectReference Include="..\..\Domain\SmaFlaCa_Domain.csproj" />
+    <ProjectReference Include="..\..\IDAL\SmaFlaCa_IDAL.csproj" />
   </ItemGroup>
 
 </Project>

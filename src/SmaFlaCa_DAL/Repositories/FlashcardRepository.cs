@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SmaFlaCa_BLL.Models;
-using SmaFlaCa_BLL.Interfaces;
+using SmaFlaCa_Domain.Models;
 using Microsoft.Data.SqlClient;
 using System.Security.Cryptography.X509Certificates;
+using SmaFlaCa_IDAL.Interfaces;
 
 namespace SmaFlaCa_DAL.Repositories
 {
@@ -104,8 +104,8 @@ namespace SmaFlaCa_DAL.Repositories
                     Console.WriteLine(e.Message);
                 }
             }
-
-        public void DeleteFlashcard(int cardId)
+        }
+        public void UpdateFlashcard(int originalCardId, string updatedCardQuestion, string updatedCardAnswer, string? updatedCardImagePath)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -113,9 +113,19 @@ namespace SmaFlaCa_DAL.Repositories
                 {
                     connection.Open();
                     Console.WriteLine("Connection opened successfully.");
-                    using (var command = new SqlCommand("DELETE FROM Flashcards WHERE CardID = @CardID", connection))
+                    using (var command = new SqlCommand("UPDATE Flashcards SET Question = @updatedCardQuestion, Answer = @updatedCardAnswer, CardImagePath = @updatedCardImagePath WHERE CardID = @originalCardId", connection))
                     {
-                        command.Parameters.AddWithValue("@CardID", cardId);
+                        command.Parameters.AddWithValue("@originalCardId", originalCardId);
+                        command.Parameters.AddWithValue("@updatedCardQuestion", updatedCardQuestion);
+                        command.Parameters.AddWithValue("@updatedCardAnswer", updatedCardAnswer);
+                        if (updatedCardImagePath == null)
+                        {
+                            command.Parameters.AddWithValue("@updatedCardImagePath", DBNull.Value);
+                        }
+                        else
+                        {
+                            command.Parameters.AddWithValue("@updatedCardImagePath", updatedCardImagePath);
+                        }
                         command.ExecuteNonQuery();
                     }
                 }
@@ -125,6 +135,8 @@ namespace SmaFlaCa_DAL.Repositories
                 }
             }
         }
+
+
 
     }
 }

@@ -1,7 +1,7 @@
-using SmaFlaCa_BLL.Interfaces;
 using SmaFlaCa_BLL.Services;
 using SmaFlaCa_DAL.Repositories;
-
+using SmaFlaCa_IBLL.Interfaces;
+using SmaFlaCa_IDAL.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
