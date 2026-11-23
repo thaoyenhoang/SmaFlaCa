@@ -8,7 +8,7 @@ namespace SmaFlaCa_IDAL.Interfaces
     public interface IDeckRepository
     {
         List<Deck> GetAllDecks();
-        void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath);
+        bool CreateDeck(string deckTitle, string deckDescription, string? deckImagePath);
         void DeleteDeck(int deckId);
         void UpdateDeck(int deckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath);
     }

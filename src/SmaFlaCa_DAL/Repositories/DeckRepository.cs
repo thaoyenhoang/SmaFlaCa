@@ -65,7 +65,7 @@ namespace SmaFlaCa_DAL.Repositories
                 return decks;
             }
         }
-        public void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
+        public bool CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -94,11 +94,13 @@ namespace SmaFlaCa_DAL.Repositories
                         }
                         command.ExecuteNonQuery();
                     }
+                    return true;
                 }
                       
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    return false;
                 }
             }
         }

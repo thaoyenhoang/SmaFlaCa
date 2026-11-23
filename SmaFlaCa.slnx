@@ -7,4 +7,7 @@
     <Project Path="src/SmaFlaCa_DAL/SmaFlaCa_DAL.csproj" />
     <Project Path="src/SmaFlaCa_PL/SmaFlaCa_PL.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="test/SmaFlaCa_Unit_Tests/SmaFlaCa_Unit_Tests.csproj" />
+  </Folder>
 </Solution>

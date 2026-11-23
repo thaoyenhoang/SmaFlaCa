@@ -18,9 +18,9 @@ namespace SmaFlaCa_BLL.Services
         {
             return deckRepository.GetAllDecks();
         }
-        public void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
+        public bool CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
         {
-            deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
+            return deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
         }
         public void DeleteDeck(int deckId)
         {
