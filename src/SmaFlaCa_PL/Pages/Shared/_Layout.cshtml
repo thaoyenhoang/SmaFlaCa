@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/SmaFlaCa_PL.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    @* <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">SmaFlaCa_PL</a>
@@ -30,7 +30,42 @@
                 </div>
             </div>
         </nav>
+    </header> *@
+
+    <header class="app-sidebar">
+        <a class="sidebar-brand" asp-area="" asp-page="/Index">
+            <span class="brand-mark" aria-hidden="true">✳</span>
+            <span>SmaFlaCa</span>
+        </a>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+            <a class="sidebar-link" href="#">
+                <span class="sidebar-icon" aria-hidden="true">▥</span>
+                <span>Progress</span>
+            </a>
+
+            <a class="sidebar-link active" asp-area="" asp-page="/Index">
+                <span class="sidebar-icon" aria-hidden="true">▤</span>
+                <span>Library</span>
+            </a>
+
+            <a class="sidebar-link" href="#">
+                <span class="sidebar-icon" aria-hidden="true">♧</span>
+                <span>Community</span>
+            </a>
+
+            <a class="sidebar-link" asp-area="" asp-page="/Privacy">
+                <span class="sidebar-icon" aria-hidden="true">⚙</span>
+                <span>Settings</span>
+            </a>
+        </nav>
+
+        <a class="sidebar-profile" href="#">
+            <span class="profile-avatar" aria-hidden="true">JD</span>
+            <span>Jane Doe</span>
+        </a>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

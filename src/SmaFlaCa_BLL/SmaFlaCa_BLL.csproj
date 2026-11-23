@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\SmaFlaCa_Domain.csproj" />
-    <ProjectReference Include="..\..\IBLL\SmaFlaCa_IBLL.csproj" />
-    <ProjectReference Include="..\..\IDAL\SmaFlaCa_IDAL.csproj" />
+    <ProjectReference Include="..\Domain\SmaFlaCa_Domain.csproj" />
+    <ProjectReference Include="..\IBLL\SmaFlaCa_IBLL.csproj" />
+    <ProjectReference Include="..\IDAL\SmaFlaCa_IDAL.csproj" />
   </ItemGroup>
 
 </Project>

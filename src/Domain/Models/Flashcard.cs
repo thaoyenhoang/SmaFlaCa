@@ -9,7 +9,7 @@ namespace SmaFlaCa_Domain.Models
         public int cardId { get; set; }
         public string question { get; set; }
         public string answer { get; set; }
-        public string cardImagePath { get; set; } = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSltdyesaETmIsYYdxPW3gcpIW0LCkUWaTdcCzKII5VMw&s=10";
+        public string cardImagePath { get; set; } 
         public int cardDeckId { get; set; }
         public Flashcard(int cardId, string question, string answer, int cardDeckId)
         {
@@ -17,6 +17,7 @@ namespace SmaFlaCa_Domain.Models
             this.question = question;
             this.answer = answer;
             this.cardDeckId = cardDeckId;
+            this.cardImagePath = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSltdyesaETmIsYYdxPW3gcpIW0LCkUWaTdcCzKII5VMw&s=10";
         }
         public Flashcard(int cardId, string question, string answer, string cardImagePath, int cardDeckId)
         {
