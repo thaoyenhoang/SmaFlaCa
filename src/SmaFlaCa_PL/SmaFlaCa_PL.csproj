@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Domain\SmaFlaCa_Domain.csproj" />
+    <ProjectReference Include="..\IBLL\SmaFlaCa_IBLL.csproj" />
+    <ProjectReference Include="..\IDAL\SmaFlaCa_IDAL.csproj" />
     <ProjectReference Include="..\SmaFlaCa_BLL\SmaFlaCa_BLL.csproj" />
     <ProjectReference Include="..\SmaFlaCa_DAL\SmaFlaCa_DAL.csproj" />
   </ItemGroup>

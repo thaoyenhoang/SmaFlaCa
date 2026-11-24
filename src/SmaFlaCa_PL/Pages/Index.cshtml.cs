@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using SmaFlaCa_BLL.Interfaces;
-using SmaFlaCa_BLL.Models;
-using SmaFlaCa_BLL.Services;
+using SmaFlaCa_Domain.Models;
+using SmaFlaCa_IBLL.Interfaces;
 
 namespace SmaFlaCa_PL.Pages
 {

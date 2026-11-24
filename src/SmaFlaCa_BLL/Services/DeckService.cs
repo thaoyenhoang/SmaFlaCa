@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using SmaFlaCa_BLL.Models;
-using SmaFlaCa_BLL.Interfaces;
+using SmaFlaCa_IBLL.Interfaces;
+using SmaFlaCa_IDAL.Interfaces;
+using SmaFlaCa_Domain.Models;
 
 namespace SmaFlaCa_BLL.Services
 {
@@ -17,17 +18,17 @@ namespace SmaFlaCa_BLL.Services
         {
             return deckRepository.GetAllDecks();
         }
-        public void CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
+        public bool CreateDeck(string deckTitle, string deckDescription, string? deckImagePath)
         {
-            deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
+            return deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
         }
-        public void DeleteDeck(int deckId)
+        public bool DeleteDeck(int deckId)
         {
-            deckRepository.DeleteDeck(deckId);
+            return deckRepository.DeleteDeck(deckId);
         }
-        public void UpdateDeck(int deckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath)
+        public bool UpdateDeck(int deckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath)
         {
-            deckRepository.UpdateDeck(deckId, updatedDeckTitle, updatedDeckDescription, updatedDeckImagePath);
+            return deckRepository.UpdateDeck(deckId, updatedDeckTitle, updatedDeckDescription, updatedDeckImagePath);
         }
     }
 }

@@ -6,198 +6,241 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="~/css/HomeStyle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/detailsPageStyle.css" asp-append-version="true" />
     <script src="~/js/detailsPage.js" defer></script>
 </head>
 <body>
+    <div class="deck-page">
+        <a asp-page="/Index" class="back-link">← &nbsp; Back to Library</a>
 
-<h1>Deck details</h1>
-
-<img src="@Model.deck.deckImagePath"
-     alt="Deck image"
-     class="img-fluid" />
-
-<p><strong>ID:</strong> @Model.deck.deckId</p>
-<p>@Model.deck.deckDescription</p>
-@foreach (var card in Model.flashcards)
-{
-    <div class="col">
-        <div class="card">
-            <img src="@card.cardImagePath" class="card-img-top" alt=",,,">
-            <div class="card-body">
-                <h4 class="card-title">@card.question</h4>
-                <p class="card-text">@card.answer</p>
-                    <button type="button" class="btn btn-primary" id="deleteCardButton" data-id=@card.cardId>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                        </svg>
-                    </button>
+        <section class="deck-header">
+            @* <div class="deck-image-wrap" aria-hidden="true">
+                <img src=@Model.deck.deckImagePath class="deck-image" />
+            </div> *@
+            <div class="deck-image-wrap">
+                @if (!string.IsNullOrWhiteSpace(Model.deck.deckImagePath))
+                {
+                    <img src="@Model.deck.deckImagePath" class="deck-image" alt="" />
+                }
+                else
+                {
+                    <span class="deck-image-placeholder" aria-hidden="true">▤</span>
+                }
             </div>
-                <button type="button" class="btn btn-primary" id="deleteCardButton" data-cardId=@card.cardId data-deckId=@card.cardDeckId>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+
+            <div class="deck-heading">
+                <h1>@Model.deck.deckTitle</h1>
+                <p>@Model.deck.deckDescription</p>
+            </div>
+
+            <div class="deck-stat">
+                <span>Cards in this deck</span>
+                <strong>@Model.flashcards.Count</strong>
+            </div>
+        </section>
+
+        <div class="deck-actions">
+            <button type="button"
+                    class="deck-button
+                    deck-button-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                </svg> Start Studying
+            </button>
+
+            <button type="button"
+                    class="deck-button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editDeckModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+                </svg> Edit deck
+            </button>
+
+            <div class="modal fade" id="editDeckModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered edit-deck-modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit this deck</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="updatedDeckTitle" class="form-label">Deck Title<div class="input-asterisk">*</div></label>
+                                    <input type="text" class="form-control" id="updatedDeckTitle" value="@Model.deck.deckTitle" name="updatedDeckTitle" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="updatedDeckDescription" class="form-label">Deck Description</label>
+                                    <input type="text" class="form-control" id="updatedDeckDescription" value="@Model.deck.deckDescription" placeholder="Enter deck description" name="updatedDeckDescription">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="updatedDeckImagePath" class="form-label">Deck Image</label>
+                                    <input type="text" class="form-control" id="updatedDeckImagePath" value="@Model.deck.deckImagePath" placeholder="Enter deck image URL" name="updatedDeckImagePath">
+                                    <input type="hidden" id="originalDeckId" name="originalDeckId" value="@Model.deck.deckId" />
+                                </div>
+                            </>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" asp-page-handler="UpdateDeck" class="btn btn-primary" id="updateDeckButton">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            <button type="button"
+                    class="deck-button"
+                    data-bs-toggle="modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-broadcast-pin" viewBox="0 0 16 16">
+                    <path d="M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707m2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708m5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708m2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8" />
+                </svg> Share deck
+            </button>
+
+            <button type="button"
+                    class="deck-button"
+                    id="deleteDeckButton"
+                    data-id="@Model.deck.deckId">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                </svg> Delete deck
+            </button>
+        </div>
+
+        <section class="cards-section">
+            <div class="card-heading">
+                <h2>All Cards (@Model.flashcards.Count)</h2>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCardModal">
+                    <svg xmlns="www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                     </svg>
                 </button>
-                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" aria-hidden="true">
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.707 0L12.5 2.354a.5.5 0 0 1 0-.707l1-1a.5.5 0 0 1 .707 0z" />
-            <path d="M13.5 3.5 12.5 2.5 4 11v1h1z" />
-            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-7a.5.5 0 0 0-1 0v7a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5h7a.5.5 0 0 0 0-1h-7A1.5 1.5 0 0 0 1 2.5z" />
-        </svg>
-    </button>
-
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit this deck</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="updateDeckForm">
-                        <div class="mb-3">
-                            <label for="updatedDeckTitle" class="form-label">Deck Title<div class="input-asterisk">*</div></label>
-                            <input type="text" class="form-control" id="updatedDeckTitle" value="@Model.deck.deckTitle" name="updatedDeckTitle" required>
+            </div>
+        <div class="modal fade" id="addCardModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered add-card-modal">
+                <div class="modal-content">
+                    <form method="post">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Create your new card</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="mb-3">
-                            <label for="updatedDeckDescription" class="form-label">Deck Description</label>
-                            <input type="text" class="form-control" id="updatedDeckDescription" value="@Model.deck.deckDescription" placeholder="Enter deck description" name="updatedDeckDescription">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="cardQuestion" class="form-label">Question<div class="input-asterisk">*</div></label>
+                                <input type="text" class="form-control" id="cardQuestion" placeholder="Enter question" name="newCardQuestion" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cardAnswer" class="form-label">Answer</label>
+                                <input type="text" class="form-control" id="cardAnswer" placeholder="Enter answer" name="newCardAnswer">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cardImagePath" class="form-label">Card Image</label>
+                                <input type="text" class="form-control" id="cardImagePath" placeholder="Enter card image URL" name="newCardImagePath">
+                                <input type="hidden" id="newCardDeckId" name="newCardDeckId" value="@Model.deck.deckId" />
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="updatedDeckImagePath" class="form-label">Deck Image</label>
-                            <input type="text" class="form-control" id="updatedDeckImagePath" value="@Model.deck.deckImagePath" placeholder="Enter deck image URL" name="updatedDeckImagePath">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" asp-page-handler="CreateFlashcard" class="btn btn-primary" id="addCardButton">Add</button>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button data-id="@Model.deck.deckId" type="submit" class="btn btn-primary" id="updateDeckButton">Save</button>
-                </div>
             </div>
         </div>
-    </div>
-        </div>
-    </div>
-}
 
-<a asp-page="/Index" class="btn btn-secondary">
-    Back to decks
-</a>
-  
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" aria-hidden="true">
-            <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1 1a.5.5 0 0 1-.707 0L12.5 2.354a.5.5 0 0 1 0-.707l1-1a.5.5 0 0 1 .707 0z" />
-            <path d="M13.5 3.5 12.5 2.5 4 11v1h1z" />
-            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-7a.5.5 0 0 0-1 0v7a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5h7a.5.5 0 0 0 0-1h-7A1.5 1.5 0 0 0 1 2.5z" />
-        </svg>
-    </button>
+            <div class="card-list">
+                @for (var i = 0; i < Model.flashcards.Count; i++)
+                {
+                    var card = Model.flashcards[i];
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit this deck</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="updateDeckForm">
-                        <div class="mb-3">
-                            <label for="updatedDeckTitle" class="form-label">Deck Title<div class="input-asterisk">*</div></label>
-                            <input type="text" class="form-control" id="updatedDeckTitle" value="@Model.deck.deckTitle" name="updatedDeckTitle" required>
+                    <article class="flashcard-row">
+                        <span class="card-number">@(i + 1)</span>
+
+                        @if (!string.IsNullOrWhiteSpace(card.cardImagePath))
+                        {
+                            <img src="@card.cardImagePath"
+                                 class="flashcard-image"
+                                 alt=""
+                                 loading="lazy" />
+                        }
+
+                        <div class="flashcard-content">
+                            <h3>@card.question</h3>
+                            <p>@card.answer</p>
                         </div>
-                        <div class="mb-3">
-                            <label for="updatedDeckDescription" class="form-label">Deck Description</label>
-                            <input type="text" class="form-control" id="updatedDeckDescription" value="@Model.deck.deckDescription" placeholder="Enter deck description" name="updatedDeckDescription">
+
+                        <div class="flashcard-actions">
+                            <button type="button"
+                                    class="icon-button"
+                                    aria-label="Edit card"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editCardModal-@card.cardId">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
+                                </svg>
+                            </button>
+
+                            <div class="modal fade" id="editCardModal-@card.cardId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <form method="post">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit this card</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="updatedCardQuestion" class="form-label">Card Question<div class="input-asterisk">*</div></label>
+                                                    <input type="text" class="form-control" id="updatedCardQuestion" value="@card.question" name="updatedCardQuestion" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="updatedCardAnswer" class="form-label">Card Answer</label>
+                                                    <input type="text" class="form-control" id="updatedCardAnswer" value="@card.answer" name="updatedCardAnswer">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="updatedCardImagePath" class="form-label">Card Image</label>
+                                                    <input type="text" class="form-control" id="updatedCardImagePath" value="@card.cardImagePath" name="updatedCardImagePath">
+                                                    <input type="hidden" id="originalCardId" name="originalCardId" value="@card.cardId" />
+                                                    <input type="hidden" id="originalDeckId" name="originalDeckId" value="@Model.deck.deckId" />
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" asp-page-handler="UpdateFlashcard" class="btn btn-primary" id="updateCardButton">Save</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button"
+                                    class="icon-button delete-icon deleteCardButton"
+                                    aria-label="Delete card"
+                                    data-id="@card.cardId"
+                                    id="deleteCardButton-@card.cardId">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                </svg>
+                            </button>
                         </div>
-                        <div class="mb-3">
-                            <label for="updatedDeckImagePath" class="form-label">Deck Image</label>
-                            <input type="text" class="form-control" id="updatedDeckImagePath" value="@Model.deck.deckImagePath" placeholder="Enter deck image URL" name="updatedDeckImagePath">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button data-id="@Model.deck.deckId" type="submit" class="btn btn-primary" id="updateDeckButton">Save</button>
-                </div>
+                    </article>
+                }
             </div>
-        </div>
+        </section>
     </div>
-
-<button type="button" class="btn btn-primary" id="deleteDeckButton" data-id=@Model.deck.deckId>
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-    </svg>
-</button>
-
-    <button type="button" class="btn btn-primary" id="editDeckButton" data-id="@Model.deck.deckId">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-             fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16"
-             aria-hidden="true">
-            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793l3.707 3.707 1.647-1.647a.5.5 0 0 0 0-.707zM9.793 2.5 2 10.293V14h3.707l7.793-7.793z" />
-        </svg>
-    </button>
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-    </svg>
-</button>
-
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create your new card</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form class="addCardForm">
-                    <div class="mb-3">
-                        <label for="cardQuestion" class="form-label">Question<div class="input-asterisk">*</div></label>
-                        <input type="text" class="form-control" id="cardQuestion" placeholder="Enter question" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cardAnswer" class="form-label">Answer</label>
-                        <input type="text" class="form-control" id="cardAnswer" placeholder="Enter answer">
-                    </div>
-                    <div class="mb-3">
-                        <label for="cardImagePath" class="form-label">Card Image</label>
-                        <input type="text" class="form-control" id="cardImagePath" placeholder="Enter card image URL">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" data-id=@Model.deck.deckId class="btn btn-primary" id="addCardButton">Add</button>
-            </div>
-        </div>
-    </div>
-</div>
-    <form method="POST">
-        <input type="hidden" id="newCardQuestion" name="newCardQuestion" />
-        <input type="hidden" id="newCardAnswer" name="newCardAnswer" />
-        <input type="hidden" id="newCardImagePath" name="newCardImagePath" />
-        <input type="hidden" id="newCardDeckId" name="newCardDeckId" />
-
-        <button type="submit"  id="submitNewCard" asp-page-handler="CreateFlashcard" style="display:none">Save</button>
-    </form>
+   
 <form method="POST">
     <input type="hidden" id="selectedDeckId" name="selectedDeckId" />
     <button type="submit" id="submitDeleteDeck" asp-page-handler="DeleteDeck" style="display:none">Delete</button>
 </form>
 
-    <form method="POST">
-        <input type="hidden" id="editedDeckTitle" name="editedDeckTitle" />
-        <input type="hidden" id="editedDeckDescription" name="editedDeckDescription" />
-        <input type="hidden" id="editedDeckImagePath" name="editedDeckImagePath" />
-        <input type="hidden" id="originalDeckId" name="originalDeckId" />
-
-        <button type="submit" id="submitEditedDeck" asp-page-handler="UpdateDeck" style="display:none">Edit</button>
-    </form>
     
     <form method="POST">
-        <input type="hidden" id="selectedDeckId" name="selectedDeckId" />
+        <input type="hidden" id="selectedDeckId" name="selectedDeckId" value="@Model.deck.deckId" />
         <input type="hidden" id="selectedCardId" name="selectedCardId" />
         <button type="submit" id="submitDeleteCard" asp-page-handler="DeleteFlashcard" style="display:none">Delete</button>
     </form>
