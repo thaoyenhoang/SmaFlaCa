@@ -17,8 +17,26 @@
         <a asp-page="/DeckDetails" asp-route-id="@Model.deck.deckId" class="back-link">← &nbsp; Back to Deck</a>
 >
 
+           
             <div class="card-list">
-                @foreach (var card in Model.flashcards)
+                @for (var i = 0; i < Model.flashcards.Count; i++)
+                {
+                    var card = Model.flashcards[i];
+
+                 
+                    <button type="button" class="flashcard-content" hidden="@(i != 0)">
+                            <div class="flashcard-front">
+                                <h3>@card.question</h3>
+                            </div>
+                            <div class="flashcard-back">
+                                <p>@card.answer</p>
+                            </div>
+                    </button>
+                   
+                }
+            </div>
+
+            @*     @foreach (var card in Model.flashcards)
                 {
                       <article class="flashcard-row">
                         <button class="flashcard-content">
@@ -32,7 +50,7 @@
 
                        
                 }
-            </div>
+            </div> *@
     
 
         @if (Model.flashcards.Count > 0)
