@@ -1,0 +1,64 @@
+﻿@page
+@model SmaFlaCa_PL.Pages.StudyCardModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="~/css/studyCardPageStyle.css" asp-append-version="true" />
+    <script src="~/js/studyCardPage.js" defer></script>
+</head>
+<body>
+
+    <div class="deck-page">
+        <a asp-page="/DeckDetails" asp-route-id="@Model.deck.deckId" class="back-link">← &nbsp; Back to Deck</a>
+>
+
+            <div class="card-list">
+                @foreach (var card in Model.flashcards)
+                {
+                      <article class="flashcard-row">
+                        <button class="flashcard-content">
+                            <div class="flashcard-front">
+                               
+                                        <h3>@card.question</h3>
+                            </div>
+                            <div class="flashcard-back"><p>@card.answer</p></div>
+                        </button>
+                    </article>
+
+                       
+                }
+            </div>
+    
+
+        @if (Model.flashcards.Count > 0)
+        {
+            <p id="cardProgress">
+                Card 1 of @Model.flashcards.Count
+            </p>
+
+            <button type="button" class="nextCardButton">
+                Bad
+            </button>
+            <button type="button" class="nextCardButton">
+                Good
+            </button>
+            <button type="button" class="nextCardButton">
+                Easy
+            </button>
+        }
+        else
+        {
+            <p>No flashcards in this deck yet.</p>
+        }
+
+    </div>
+
+  
+
+</body>
+</html>

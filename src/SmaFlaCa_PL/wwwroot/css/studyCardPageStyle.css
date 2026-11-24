@@ -1,0 +1,48 @@
+﻿
+
+.flashcard-content {
+    cursor: pointer;
+    height: 300px;
+    perspective: 1000px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: rotate 500ms linear;
+    width: 200px;
+}
+
+    .flashcard-content.show {
+        rotate: y 180deg;
+    }
+
+.flashcard-front,
+.flashcard-back {
+    backface-visibility: hidden;
+    border: 5px solid #000000;
+    display: grid;
+    inset: 0;
+    padding: 0.5em;
+    place-content: center;
+    position: absolute;
+}
+
+.flashcard-front {
+    background-color: pink;
+}
+
+.flashcard-back {
+    background-color: aliceblue;
+    rotate: y 180deg;
+}
+
+.flashcard-row {
+    display: flex;
+    min-height: 54px;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 14px;
+    border-bottom: 1px solid #edf1ef;
+}
+
+    .flashcard-row:last-child {
+        border-bottom: 0;
+    }

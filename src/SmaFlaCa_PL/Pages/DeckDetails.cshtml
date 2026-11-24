@@ -28,6 +28,11 @@
         </section>
 
         <div class="deck-actions">
+            <a asp-page="/StudyCards"
+               asp-route-id="@Model.deck.deckId"
+               class="btn deck-details-button">
+                Start Studying
+            </a>
             <button type="button"
                     class="deck-button deck-button-primary"
                     data-bs-toggle="modal"
