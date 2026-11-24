@@ -9,7 +9,7 @@ namespace SmaFlaCa_IBLL.Interfaces
     {
         List<Deck> GetAllDecks();
         bool CreateDeck(string deckTitle, string deckDescription, string? deckImagePath);
-        void DeleteDeck(int deckId);
-        void UpdateDeck(int deckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath);
+        bool DeleteDeck(int deckId);
+        bool UpdateDeck(int deckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath);
     }
 }

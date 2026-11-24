@@ -63,16 +63,32 @@ body {
     text-decoration: none;
 }
 
-.brand-mark {
+/*.brand-mark {
     color: #3e8f87;
     font-size: 26px;
     line-height: 1;
+}*/
+.brand-mark {
+    display: inline-flex;
+    flex: 0 0 32px;
+    width: 32px;
+    height: 36px;
 }
+
+    .brand-mark svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
 
 .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 6px;
+}
+.sidebar-icon i {
+    display: inline-block;
+    line-height: 1;
 }
 
 .sidebar-link,

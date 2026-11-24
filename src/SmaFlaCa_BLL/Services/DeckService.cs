@@ -22,13 +22,13 @@ namespace SmaFlaCa_BLL.Services
         {
             return deckRepository.CreateDeck(deckTitle, deckDescription, deckImagePath);
         }
-        public void DeleteDeck(int deckId)
+        public bool DeleteDeck(int deckId)
         {
-            deckRepository.DeleteDeck(deckId);
+            return deckRepository.DeleteDeck(deckId);
         }
-        public void UpdateDeck(int deckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath)
+        public bool UpdateDeck(int deckId, string updatedDeckTitle, string updatedDeckDescription, string? updatedDeckImagePath)
         {
-            deckRepository.UpdateDeck(deckId, updatedDeckTitle, updatedDeckDescription, updatedDeckImagePath);
+            return deckRepository.UpdateDeck(deckId, updatedDeckTitle, updatedDeckDescription, updatedDeckImagePath);
         }
     }
 }

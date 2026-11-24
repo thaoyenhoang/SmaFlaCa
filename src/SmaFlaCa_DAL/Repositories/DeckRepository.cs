@@ -105,7 +105,7 @@ namespace SmaFlaCa_DAL.Repositories
             }
         }
 
-        public void DeleteDeck(int deckId)
+        public bool DeleteDeck(int deckId)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -118,14 +118,16 @@ namespace SmaFlaCa_DAL.Repositories
                         command.Parameters.AddWithValue("@deckId", deckId);
                         command.ExecuteNonQuery();
                     }
+                    return true;    
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    return false;
                 }
             }
         }
-        public void UpdateDeck(int deckId, string updatedDeckTitle, string? updatedDeckDescription, string? updatedDeckImagePath)
+        public bool UpdateDeck(int deckId, string updatedDeckTitle, string? updatedDeckDescription, string? updatedDeckImagePath)
         {
             using (var connection = new SqlConnection(connectionString))
             {
@@ -155,10 +157,12 @@ namespace SmaFlaCa_DAL.Repositories
                         }
                         command.ExecuteNonQuery();
                     }
+                    return true;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    return false;
                 }
             }
         }

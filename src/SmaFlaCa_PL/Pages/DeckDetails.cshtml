@@ -6,11 +6,97 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="~/css/HomeStyle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/detailsPageStyle.css" asp-append-version="true" />
     <script src="~/js/detailsPage.js" defer></script>
 </head>
 <body>
+    <div class="deck-page">
+        <a asp-page="/Index" class="back-link">← &nbsp; Back to Library</a>
 
+        <section class="deck-header">
+            <div class="deck-icon" aria-hidden="true">✿</div>
+
+            <div class="deck-heading">
+                <h1>@Model.deck.deckTitle</h1>
+                <p>@Model.deck.deckDescription</p>
+            </div>
+
+            <div class="deck-stat">
+                <span>Cards in this deck</span>
+                <strong>@Model.flashcards.Count</strong>
+            </div>
+        </section>
+
+        <div class="deck-actions">
+            <button type="button"
+                    class="deck-button deck-button-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addCardModal">
+                + &nbsp; Add a card
+            </button>
+
+            <button type="button"
+                    class="deck-button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editDeckModal">
+                ✎ &nbsp; Edit deck
+            </button>
+
+            <button type="button"
+                    class="deck-button"
+                    id="deleteDeckButton"
+                    data-id="@Model.deck.deckId">
+                Delete deck
+            </button>
+        </div>
+
+        <section class="cards-section">
+            <h2>All Cards (@Model.flashcards.Count)</h2>
+
+            <div class="card-list">
+                @for (var i = 0; i < Model.flashcards.Count; i++)
+                {
+                    var card = Model.flashcards[i];
+
+                    <article class="flashcard-row">
+                        <span class="card-number">@(i + 1)</span>
+
+                        @if (!string.IsNullOrWhiteSpace(card.cardImagePath))
+                        {
+                            <img src="@card.cardImagePath"
+                                 class="flashcard-image"
+                                 alt=""
+                                 loading="lazy" />
+                        }
+
+                        <div class="flashcard-content">
+                            <h3>@card.question</h3>
+                            <p>@card.answer</p>
+                        </div>
+
+                        <div class="flashcard-actions">
+                            <button type="button"
+                                    class="icon-button"
+                                    aria-label="Edit card"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editCardModal-@card.cardId">
+                                ✎
+                            </button>
+
+                            <button type="button"
+                                    class="icon-button delete-icon"
+                                    aria-label="Delete card"
+                                    data-id="@card.cardId"
+                                    id="deleteCardButton-@card.cardId">
+                                ♲
+                            </button>
+                        </div>
+                    </article>
+                }
+            </div>
+        </section>
+    </div>
+@* 
 <h1>Deck details</h1>
 <img src="@Model.deck.deckImagePath"
      alt="Deck image"
@@ -164,7 +250,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> *@
    
 <form method="POST">
     <input type="hidden" id="selectedDeckId" name="selectedDeckId" />
